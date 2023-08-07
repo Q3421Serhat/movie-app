@@ -1,11 +1,10 @@
-import Navbar from './components/Navbar';
-import Register from './pages/Register';
+
 import React from 'react'
+import AppRouter from './router/AppRouter';
 const App = () => {
   return (
-    <div>
-      <Navbar />
-<Register />
+    <div className='dark:bg-gray-dark-main min-h-screen'>
+    <AppRouter />
     </div>
   );
 };
