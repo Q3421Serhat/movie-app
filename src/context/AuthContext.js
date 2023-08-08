@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../auth/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
@@ -13,7 +13,16 @@ export const AuthContext = createContext()
 // }
 
 const AuthContextProvider  = ({children}) => {
+    const [currentUser, setcurrentUser] = useState(false)
     let navigate = useNavigate();
+
+useEffect(() => {
+  userObserver()
+
+}, [])
+
+
+
 const createUser = async(email, password) => {
     try {
         let userCredential = await createUserWithEmailAndPassword(
@@ -43,10 +52,25 @@ const signIn = async(email, password) => {
     } catch (error) {
       toastErrorNotify(error.message);  
     }
+};
+const logOut = () => {
+    signOut(auth)
+    toastSuccessNotify('Logged out succesfully!')
 }
 
-
- const values = {createUser, signIn};
+const userObserver = () => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const {email, dispplayName, photoURL} = user
+            setcurrentUser({email, dispplayName, photoURL})
+            console.log(user);
+        } else {
+          // User is signed out
+          console.log('logged out')
+        }
+    });
+}
+ const values = {createUser, signIn, logOut, currentUser};
 
 
   return (
