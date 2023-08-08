@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import { auth } from '../auth/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 export const AuthContext = createContext()
 
 // export const useAuthContext =() => {
@@ -9,18 +10,22 @@ export const AuthContext = createContext()
 const AuthContextProvider  = ({children}) => {
 const createUser = async(email, password) => {
     try {
-        await createUserWithEmailAndPassword(auth, email, password)  
-    } catch (error) {
-        console.log(error)
+        let userCredential = await createUserWithEmailAndPassword(
+            auth, 
+            email, 
+            password
+        );
+            console.log(userCredential); 
         
+    } catch (error) {
+        console.log(error);  
     }
 };
-values={createUser}
+ const values = {createUser};
 
 
-  return (
-    <AuthContext.Provider value={values}>{children} </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={values}>{children} </AuthContext.Provider>
+  
 }
 
-export default AuthContextProvider 
+export default AuthContextProvider; 
