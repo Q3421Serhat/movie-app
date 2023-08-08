@@ -66,6 +66,7 @@ const userObserver = () => {
             console.log(user);
         } else {
           // User is signed out
+          setcurrentUser(false);
           console.log('logged out')
         }
     });
