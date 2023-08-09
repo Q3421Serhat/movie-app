@@ -8,7 +8,7 @@ const Login = () => {
 
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState("");
-const {signIn} = useContext(AuthContext);
+const {signIn, signUpProvider} = useContext(AuthContext);
 
 const handleSubmit = (e) => {
 e.preventDefault();
@@ -55,7 +55,9 @@ signIn(email, password)
 
 
           <button type="submit" className="btn-danger">Login</button>
-          <button type="button" className="btn-danger flex justify-between items-center">
+          <button type="button" className="btn-danger flex justify-between items-center"
+          onClick={()=>signUpProvider()}
+          >
             Continue with Google
             <GoogleIcon color="currentColor" />
           </button>
