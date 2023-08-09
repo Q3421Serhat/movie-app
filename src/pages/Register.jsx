@@ -8,7 +8,7 @@ const [name, setName] = useState('');
 const [lastName, setlastName] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState();
-const {createUser} = useContext(AuthContext);
+const {createUser, signUpProvider} = useContext(AuthContext);
 
 const handleSubmit = (e) => {
 e.preventDefault();
@@ -49,7 +49,9 @@ createUser(email, password, displayName);
             <label htmlFor="floating_password">Password</label>
           </div>
           <button type="submit" className="btn-danger">Register</button>
-          <button type="button" className="btn-danger flex justify-between items-center">
+          <button type="button" className="btn-danger flex justify-between items-center"
+onClick={()=>signUpProvider()}
+>
             Continue with Google
             <GoogleIcon color="currentColor" />
           </button>

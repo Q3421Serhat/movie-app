@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../auth/firebase'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
@@ -74,7 +74,25 @@ const userObserver = () => {
           console.log('logged out')
         }
     });
+};
+
+const signUpProvider = () => {
+const provider = new GoogleAuthProvider(); 
+
+signInWithPopup(auth, provider)
+  .then((result) => {
+   console.log(result)
+   navigate('/')
+  }).catch((error) => {
+    // Handle Errors here.
+    console.log(error)
+   
+  });
+
 }
+
+
+
  const values = {createUser, signIn, logOut, currentUser};
 
 

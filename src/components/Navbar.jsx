@@ -20,7 +20,10 @@ export default function Navbar() {
                 React Movie App
                 </Link>
               <div className="absolute inset-y-0 right-0 flex items-center">
-                {currentUser && <h5 className='mr-2 capitalize'>{currentUser?.displayName} </h5> }
+                {currentUser && (
+                <h5 className='mr-2 capitalize'>{currentUser?.
+                displayName}</h5> 
+                )}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
