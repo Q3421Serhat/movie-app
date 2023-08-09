@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../auth/firebase'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
@@ -23,13 +23,17 @@ useEffect(() => {
 
 
 
-const createUser = async(email, password) => {
+const createUser = async(email, password, displayName) => {
     try {
         let userCredential = await createUserWithEmailAndPassword(
             auth, 
             email, 
             password
         );
+await updateProfile(auth.currentUser, {
+    displayName,
+});
+
         // console.log(userCredential); 
         navigate('/');
           toastSuccessNotify('Registered succesfully!')

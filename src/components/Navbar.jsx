@@ -8,8 +8,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const {logOut} = useContext(AuthContext)
-  const currentUser = {displayName: 'bubu beautiful'}
+  const {logOut, currentUser} = useContext(AuthContext);
+  // const currentUser = {displayName: 'bubu beautiful'}
   return (
     <>
     <Disclosure as="nav" className="bg-neutral-100 dark:bg-gray-900 py-3 dark:text-white fixed top-0 z-20 w-full">
