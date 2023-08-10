@@ -56,7 +56,7 @@ signIn(email, password)
 
           <button type="submit" className="btn-danger">Login</button>
           <button type="button" className="btn-danger flex justify-between items-center"
-          onClick={()=>signUpProvider()}
+          onClick={() => signUpProvider()}
           >
             Continue with Google
             <GoogleIcon color="currentColor" />

@@ -17,9 +17,9 @@ const AuthContextProvider  = ({children}) => {
     let navigate = useNavigate();
 
 useEffect(() => {
-  userObserver()
+  userObserver();
 
-}, [])
+}, []);
 
 
 
@@ -65,8 +65,8 @@ const logOut = () => {
 const userObserver = () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            const {email, dispplayName, photoURL} = user
-            setcurrentUser({email, dispplayName, photoURL})
+            const {email, displayName, photoURL} = user
+            setcurrentUser({email, displayName, photoURL})
             console.log(user);
         } else {
           // User is signed out
@@ -81,20 +81,14 @@ const provider = new GoogleAuthProvider();
 
 signInWithPopup(auth, provider)
   .then((result) => {
-   console.log(result)
-   navigate('/')
+   console.log(result);
+   navigate('/');
   }).catch((error) => {
     // Handle Errors here.
-    console.log(error)
-   
+    console.log(Error);
   });
-
-}
-
-
-
- const values = {createUser, signIn, logOut, currentUser};
-
+};
+ const values = {createUser, signIn, logOut, currentUser,signUpProvider};
 
   return (
   <AuthContext.Provider value={values}>
